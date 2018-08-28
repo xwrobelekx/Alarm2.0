@@ -12,6 +12,8 @@
 		3BE6887A2135F5D40068CDB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE688782135F5D40068CDB8 /* Main.storyboard */; };
 		3BE6887C2135F5D50068CDB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE6887B2135F5D50068CDB8 /* Assets.xcassets */; };
 		3BE6887F2135F5D50068CDB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE6887D2135F5D50068CDB8 /* LaunchScreen.storyboard */; };
+		3BE6888B2135F6430068CDB8 /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE6888A2135F6430068CDB8 /* AlarmController.swift */; };
+		3BE6888E2135F67C0068CDB8 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE6888D2135F67C0068CDB8 /* Alarm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		3BE6887B2135F5D50068CDB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BE6887E2135F5D50068CDB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BE688802135F5D50068CDB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BE6888A2135F6430068CDB8 /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
+		3BE6888D2135F67C0068CDB8 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,56 @@
 		3BE688732135F5D40068CDB8 /* Alarm2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				3BE6888C2135F6680068CDB8 /* Model Controller */,
+				3BE688892135F6260068CDB8 /* Views */,
+				3BE688882135F61E0068CDB8 /* Model */,
+				3BE688872135F5FF0068CDB8 /* View Controller */,
+				3BE688862135F5F10068CDB8 /* Resources */,
+			);
+			path = Alarm2.0;
+			sourceTree = "<group>";
+		};
+		3BE688862135F5F10068CDB8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				3BE688742135F5D40068CDB8 /* AppDelegate.swift */,
-				3BE688762135F5D40068CDB8 /* ViewController.swift */,
-				3BE688782135F5D40068CDB8 /* Main.storyboard */,
 				3BE6887B2135F5D50068CDB8 /* Assets.xcassets */,
 				3BE6887D2135F5D50068CDB8 /* LaunchScreen.storyboard */,
 				3BE688802135F5D50068CDB8 /* Info.plist */,
 			);
-			path = Alarm2.0;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3BE688872135F5FF0068CDB8 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3BE688762135F5D40068CDB8 /* ViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		3BE688882135F61E0068CDB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3BE6888D2135F67C0068CDB8 /* Alarm.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3BE688892135F6260068CDB8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BE688782135F5D40068CDB8 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3BE6888C2135F6680068CDB8 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3BE6888A2135F6430068CDB8 /* AlarmController.swift */,
+			);
+			path = "Model Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +183,8 @@
 			files = (
 				3BE688772135F5D40068CDB8 /* ViewController.swift in Sources */,
 				3BE688752135F5D40068CDB8 /* AppDelegate.swift in Sources */,
+				3BE6888B2135F6430068CDB8 /* AlarmController.swift in Sources */,
+				3BE6888E2135F67C0068CDB8 /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
