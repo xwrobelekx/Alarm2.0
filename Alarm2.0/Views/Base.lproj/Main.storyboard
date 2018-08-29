@@ -100,15 +100,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5c-Yt-etZ">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TB8-NX-gpL">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="204"/>
-                                                </pickerView>
+                                                    <date key="date" timeIntervalSinceReferenceDate="557196849.60763705">
+                                                        <!--2018-08-29 00:54:09 +0000-->
+                                                    </date>
+                                                </datePicker>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="o5c-Yt-etZ" firstAttribute="top" secondItem="TyB-e2-ehi" secondAttribute="top" id="Irp-sm-meC"/>
-                                                <constraint firstItem="o5c-Yt-etZ" firstAttribute="leading" secondItem="TyB-e2-ehi" secondAttribute="leading" id="MKo-xG-eTZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="o5c-Yt-etZ" secondAttribute="bottom" id="Yza-Rm-qyp"/>
-                                                <constraint firstAttribute="trailing" secondItem="o5c-Yt-etZ" secondAttribute="trailing" id="xh5-eY-gfZ"/>
+                                                <constraint firstItem="TB8-NX-gpL" firstAttribute="leading" secondItem="TyB-e2-ehi" secondAttribute="leading" id="IP7-77-yvF"/>
+                                                <constraint firstAttribute="bottom" secondItem="TB8-NX-gpL" secondAttribute="bottom" id="diH-3Z-zb4"/>
+                                                <constraint firstItem="TB8-NX-gpL" firstAttribute="top" secondItem="TyB-e2-ehi" secondAttribute="top" id="maC-g8-2GG"/>
+                                                <constraint firstAttribute="trailing" secondItem="TB8-NX-gpL" secondAttribute="trailing" id="vxa-MI-mYd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -179,7 +182,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="datePicker" destination="o5c-Yt-etZ" id="rdY-M1-n7s"/>
+                        <outlet property="datePicker" destination="TB8-NX-gpL" id="y2v-zY-w1z"/>
                         <outlet property="eanbleButton" destination="xBS-mw-v6T" id="28B-9m-7U2"/>
                         <outlet property="titletextField" destination="UDV-4a-YQv" id="qKL-Ej-lP9"/>
                     </connections>
