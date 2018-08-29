@@ -26,6 +26,7 @@ class SwitchTableViewCell: UITableViewCell {
     var alarm: Alarm? {
         didSet{
             updateViews()
+            print("called the update views function on a did set in cell")
         }
     }
     
@@ -52,10 +53,7 @@ class SwitchTableViewCell: UITableViewCell {
         timeLabel.text = alarmPassedIn.fireTimeAsString
         nameLabel.text = alarmPassedIn.name
         alarmSwitch.isOn = alarmPassedIn.enabled
-        
-        
-        
-        
+        print("updated all the views in cell")
     }
     
     

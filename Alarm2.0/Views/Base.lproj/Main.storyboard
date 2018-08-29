@@ -61,7 +61,7 @@
                                     <outlet property="alarmSwitch" destination="t12-1k-lVg" id="SwM-K1-kTY"/>
                                     <outlet property="nameLabel" destination="1MC-02-KuS" id="W9l-2C-bw0"/>
                                     <outlet property="timeLabel" destination="GUz-BS-ehE" id="RaZ-mK-Gt3"/>
-                                    <segue destination="SUa-dh-XCz" kind="show" id="H11-uu-hi2"/>
+                                    <segue destination="SUa-dh-XCz" kind="show" identifier="toDetailTableViewSegue" id="H11-uu-hi2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -126,7 +126,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UDV-4a-YQv">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the name for your alarm..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UDV-4a-YQv">
                                                     <rect key="frame" x="10" y="6" width="355" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -153,6 +153,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBS-mw-v6T">
                                                     <rect key="frame" x="10" y="14" width="355" height="30"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="ON"/>
                                                     <connections>
                                                         <action selector="enableButtonTapped:" destination="SUa-dh-XCz" eventType="touchUpInside" id="FUP-kC-eI0"/>
@@ -209,6 +210,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XkH-Am-PNA"/>
+        <segue reference="H11-uu-hi2"/>
     </inferredMetricsTieBreakers>
 </document>

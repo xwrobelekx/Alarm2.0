@@ -41,6 +41,7 @@ class AlarmController {
         let newAlarm = Alarm(name: name, fireDate: fireDate)
         newAlarm.enabled = enabled
         alarms.append(newAlarm)
+        print("created new alarm from alarm controller")
     }
     
     
@@ -48,12 +49,14 @@ class AlarmController {
         alarm.fireDate = fireDate
         alarm.name = name
         alarm.enabled = enabled
+        print("update function called from Alarm controller")
         
     }
     
     func delete(alarm: Alarm){
         guard let index = alarms.index(of: alarm) else {return}
         alarms.remove(at: index)
+        print("delete function called from Alarm controller")
     }
     
     
@@ -62,6 +65,7 @@ class AlarmController {
     func toggleEnabled(for alarm: Alarm){
      // switches the switch from true to false and vice versa
      alarm.enabled = !alarm.enabled
+        print("toggle switch flipped")
         
         
     }

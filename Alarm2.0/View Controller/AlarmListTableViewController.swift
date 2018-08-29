@@ -11,21 +11,17 @@ import UIKit
 class AlarmListTableViewController: UITableViewController, SwitchTableViewDelegate {
  
     
-
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+  
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
@@ -43,9 +39,6 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
         // delegate pattern step 6 - set the current cell as the delegate
         cell?.cellDelegate = self
         cell?.alarm = alarmToDisplay
-
-       
-
         return cell ?? UITableViewCell()
     }
  
@@ -67,6 +60,7 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
             let alarmToDelete = AlarmController.shared.alarms[indexPath.row]
             AlarmController.shared.delete(alarm: alarmToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
        
         }
     }
@@ -81,18 +75,44 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
         guard let indexPath = tableView.indexPath(for: cell) else {return}
         let alarmToggleToBeFlipped = AlarmController.shared.alarms[indexPath.row]
         AlarmController.shared.toggleEnabled(for: alarmToggleToBeFlipped)
+        print("protocol conformance function fired up")
     }
     
     
 
-    /*
+
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toDetailTableViewSegue" {
+            let destiantionVC = segue.destination as? AlarmDetailTableViewController
+            guard let indexPath = tableView.indexPathForSelectedRow else {return}
+            let tappedAlarm = AlarmController.shared.alarms[indexPath.row]
+            destiantionVC?.alarmForUpdate = tappedAlarm
+            print("segue activated, data sent over to detail view")
+            
+        }
+        
+        
+        
+        
     }
-    */
+   
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
