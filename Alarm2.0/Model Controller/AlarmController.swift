@@ -35,7 +35,7 @@ class AlarmController: AlarmScheduler {
     }
     
     //MARK: - User Notification Delegate
-    weak var userNotificationDelegate : AlarmScheduler?
+    // weak var userNotificationDelegate : AlarmScheduler?
     
     
     
@@ -46,7 +46,8 @@ class AlarmController: AlarmScheduler {
         newAlarm.enabled = enabled
         alarms.append(newAlarm)
         saveToPersistance()
-        userNotificationDelegate?.sheduleUserNotifications(for: newAlarm)
+        sheduleUserNotifications(for: newAlarm)
+        //userNotificationDelegate?.sheduleUserNotifications(for: newAlarm)
         print("created new alarm from alarm controller")
         
     }
@@ -57,7 +58,8 @@ class AlarmController: AlarmScheduler {
         alarm.name = name
         alarm.enabled = enabled
         saveToPersistance()
-        userNotificationDelegate?.sheduleUserNotifications(for: alarm)
+        sheduleUserNotifications(for: alarm)
+        //userNotificationDelegate?.sheduleUserNotifications(for: alarm)
         print("update function called from Alarm controller")
         
         
@@ -79,10 +81,12 @@ class AlarmController: AlarmScheduler {
         print("toggle switch flipped")
         if alarm.enabled {
            //alarm enabled - schedule notifications
-            userNotificationDelegate?.sheduleUserNotifications(for: alarm)
+            sheduleUserNotifications(for: alarm)
+           // userNotificationDelegate?.sheduleUserNotifications(for: alarm)
         } else {
             // alarm not enabled - cancell notifications
-            userNotificationDelegate?.cancelUserNotifications(for: alarm)
+            cancelUserNotifications(for: alarm)
+            //userNotificationDelegate?.cancelUserNotifications(for: alarm)
         }
     }
 
@@ -159,7 +163,11 @@ extension AlarmScheduler {
         
         let notificationRequest = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: notificationTrigger)
         
-        
+        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+            if let error = error {
+                print("There was an error while adding notification request: \(error) \(error.localizedDescription)")
+            }
+        }
         
     }
     
