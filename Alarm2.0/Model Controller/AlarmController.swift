@@ -41,6 +41,7 @@ class AlarmController {
         let newAlarm = Alarm(name: name, fireDate: fireDate)
         newAlarm.enabled = enabled
         alarms.append(newAlarm)
+        saveToPersistance()
         print("created new alarm from alarm controller")
     }
     
@@ -49,13 +50,16 @@ class AlarmController {
         alarm.fireDate = fireDate
         alarm.name = name
         alarm.enabled = enabled
+        saveToPersistance()
         print("update function called from Alarm controller")
+        
         
     }
     
     func delete(alarm: Alarm){
         guard let index = alarms.index(of: alarm) else {return}
         alarms.remove(at: index)
+        saveToPersistance()
         print("delete function called from Alarm controller")
     }
     
@@ -72,15 +76,48 @@ class AlarmController {
     
     
     
+    //MARK: - Persistance
+    
+    //Get URL From FileMAnager
+    private func fileURL() -> URL {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fileName = "Alarm.json"
+        let documentDirectoryURL = urls[0].appendingPathComponent(fileName)
+        return documentDirectoryURL
+        
+    }
+    
+    // Save to persistance
+
+    private func saveToPersistance(){
+        let encoder = JSONEncoder()
+        do{
+            let data = try encoder.encode(alarms)
+            try data.write(to: fileURL())
+        }catch {
+            print("Failed saving to persistance store: \(error) \(error.localizedDescription)")
+        }
+        print("saved to persistance called")
+    }
     
     
     
     
     
-    
-    
-    
-    
+    //Load from Persistance
+    func loadFromPersistance() -> [Alarm]{
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: fileURL())
+            let alarmArray = try decoder.decode([Alarm].self, from: data)
+            return alarmArray
+            print("loaded from persistance")
+        } catch {
+             print("Failed loading from persistance store: \(error) \(error.localizedDescription)")
+        }
+        return []
+        print("loaded from persistance called but were unable to load data")
+    }
     
     
     
