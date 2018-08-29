@@ -18,38 +18,14 @@ class AlarmController: AlarmScheduler {
     //MARK: - Singelton
     static let shared = AlarmController()
     
-    //MARK: - Mockup data
-    
-    let mockupData : [Alarm] = {
-    
-      
-        let fiveAmAlarm = Alarm(name: "5 Am Alarm", fireDate: Date(timeInterval: 1500, since: Date()))
-        let sixAmAlarm = Alarm(name: "6 Am Alarm", fireDate: Date(timeInterval: 1000, since: Date()))
-        let sevenAmAlarm = Alarm(name: "7 Am Alarm", fireDate: Date(timeInterval: 2000, since: Date()))
-
-        return [fiveAmAlarm, sixAmAlarm, sevenAmAlarm]
-    }()
-    //asigned mockup data to alarms array
-    init(){
-    alarms = mockupData
-    }
-    
-    //MARK: - User Notification Delegate
-    // weak var userNotificationDelegate : AlarmScheduler?
-    
-    
     
     //MARK: - CRUD Functions
-    
     func createAlarm(fireDate: Date, name: String, enabled: Bool){
         let newAlarm = Alarm(name: name, fireDate: fireDate)
         newAlarm.enabled = enabled
         alarms.append(newAlarm)
         saveToPersistance()
         sheduleUserNotifications(for: newAlarm)
-        //userNotificationDelegate?.sheduleUserNotifications(for: newAlarm)
-        print("created new alarm from alarm controller")
-        
     }
     
     
@@ -59,37 +35,29 @@ class AlarmController: AlarmScheduler {
         alarm.enabled = enabled
         saveToPersistance()
         sheduleUserNotifications(for: alarm)
-        //userNotificationDelegate?.sheduleUserNotifications(for: alarm)
-        print("update function called from Alarm controller")
-        
-        
     }
     
     func delete(alarm: Alarm){
         guard let index = alarms.index(of: alarm) else {return}
         alarms.remove(at: index)
         saveToPersistance()
-        print("delete function called from Alarm controller")
+        
     }
-    
     
     
     //MARK: - Methods
     func toggleEnabled(for alarm: Alarm){
-     // switches the switch from true to false and vice versa
-     alarm.enabled = !alarm.enabled
-        print("toggle switch flipped")
+        // switches the switch from true to false and vice versa
+        alarm.enabled = !alarm.enabled
         if alarm.enabled {
-           //alarm enabled - schedule notifications
+            //alarm enabled - schedule notifications
             sheduleUserNotifications(for: alarm)
-           // userNotificationDelegate?.sheduleUserNotifications(for: alarm)
         } else {
             // alarm not enabled - cancell notifications
             cancelUserNotifications(for: alarm)
-            //userNotificationDelegate?.cancelUserNotifications(for: alarm)
         }
     }
-
+    
     //MARK: - Persistance
     
     //Get URL From FileMAnager
@@ -98,7 +66,6 @@ class AlarmController: AlarmScheduler {
         let fileName = "Alarm.json"
         let documentDirectoryURL = urls[0].appendingPathComponent(fileName)
         return documentDirectoryURL
-        
     }
     
     // Save to persistance
@@ -121,16 +88,11 @@ class AlarmController: AlarmScheduler {
             let alarmArray = try decoder.decode([Alarm].self, from: data)
             print("loaded from persistance")
             return alarmArray
-            
         } catch {
-             print("Failed loading from persistance store: \(error) \(error.localizedDescription)")
+            print("Failed loading from persistance store: \(error) \(error.localizedDescription)")
         }
-        print("loaded from persistance called but were unable to load data")
         return []
-        
     }
-
-    
 }
 
 
@@ -148,34 +110,23 @@ extension AlarmScheduler {
     func sheduleUserNotifications(for alarm: Alarm){
         //create an instance of the Notification content, and set the properties.
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "\(alarm.name) - working?"
+        notificationContent.title = "\(alarm.name)"
         notificationContent.body = "Its \(alarm.fireTimeAsString), Wake UP!!"
         notificationContent.sound = UNNotificationSound.default()
-        
-        
-        
         //get the date component using "current" on the "Calendar" - Date can be pulled from the fireDate from your alarm
         let dateComponents = Calendar.current.dateComponents([.minute, .second], from: alarm.fireDate)
-        
         //next create Calendar Notification Trigger - date components needed - line202 from README
         let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
-        
         let notificationRequest = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: notificationTrigger)
-        
         UNUserNotificationCenter.current().add(notificationRequest) { (error) in
             if let error = error {
                 print("There was an error while adding notification request: \(error) \(error.localizedDescription)")
             }
         }
-        
     }
-    
-    
     func cancelUserNotifications(for alarm: Alarm) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])
     }
-    
 }
 
 

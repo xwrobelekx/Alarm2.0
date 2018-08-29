@@ -62,10 +62,10 @@
 		3BE688732135F5D40068CDB8 /* Alarm2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				3BE6888C2135F6680068CDB8 /* Model Controller */,
-				3BE688892135F6260068CDB8 /* Views */,
 				3BE688882135F61E0068CDB8 /* Model */,
+				3BE688892135F6260068CDB8 /* Views */,
 				3BE688872135F5FF0068CDB8 /* View Controller */,
+				3BE6888C2135F6680068CDB8 /* Model Controller */,
 				3BE688862135F5F10068CDB8 /* Resources */,
 			);
 			path = Alarm2.0;

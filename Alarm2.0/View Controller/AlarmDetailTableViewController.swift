@@ -11,8 +11,6 @@ import UIKit
 class AlarmDetailTableViewController: UITableViewController {
     
     //MARK: - Outlets
-    
-    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var titletextField: UITextField!
     @IBOutlet weak var eanbleButton: UIButton!
@@ -23,7 +21,6 @@ class AlarmDetailTableViewController: UITableViewController {
         didSet {
             loadViewIfNeeded()
             updateViews()
-            print("loaded the views on the did set property in details view")
         }
     }
     
@@ -33,19 +30,15 @@ class AlarmDetailTableViewController: UITableViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-
+    
     //MARK: - Methods
     private func updateViews() {
-       
         guard let alarm = alarmForUpdate else {return}
         alarmIsOn = alarm.enabled
         datePicker.date = alarm.fireDate
         titletextField.text = alarm.name
-            
         updateButtonApperiance()
-        
     }
     
     func updateButtonApperiance(){
@@ -60,8 +53,6 @@ class AlarmDetailTableViewController: UITableViewController {
     
     
     //MARK: - Actions
-    
-    
     @IBAction func enableButtonTapped(_ sender: Any) {
         //make sure were alarm to switch the value on
         guard let alarm = alarmForUpdate else {return}
@@ -71,14 +62,12 @@ class AlarmDetailTableViewController: UITableViewController {
         alarmIsOn = alarm.enabled
         // call the update on the button
         updateButtonApperiance()
-        
     }
     
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = titletextField.text else {return}
         guard name != "" else {return}
-        
         
         if let alarmUnwrapped = alarmForUpdate {
             // update existing alarm
@@ -87,13 +76,7 @@ class AlarmDetailTableViewController: UITableViewController {
         } else {
             //create new alarm
             AlarmController.shared.createAlarm(fireDate: datePicker.date, name: name, enabled: alarmIsOn)
-            print("created new alarm")
-           
         }
         navigationController?.popViewController(animated: true)
-        
     }
-    
-    
-
 }

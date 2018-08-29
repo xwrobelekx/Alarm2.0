@@ -9,30 +9,26 @@
 import UIKit
 // delegate pattern step 4 - adopt the protocol
 class AlarmListTableViewController: UITableViewController, SwitchTableViewDelegate {
- 
+    
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-  
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
-
+    
+    
     // MARK: - Table view data source
-
-
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return AlarmController.shared.alarms.count
     }
-
- 
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "updateCell", for: indexPath) as? SwitchTableViewCell
         let alarmToDisplay = AlarmController.shared.alarms[indexPath.row]
@@ -41,33 +37,24 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
         cell?.alarm = alarmToDisplay
         return cell ?? UITableViewCell()
     }
- 
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
-   
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             let alarmToDelete = AlarmController.shared.alarms[indexPath.row]
             AlarmController.shared.delete(alarm: alarmToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-       
         }
     }
-
-    
-    
-    
     
     //MARK: - Methods
     // delegate pattern step 5 - confrom to the protocol
@@ -78,9 +65,6 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
         print("protocol conformance function fired up")
     }
     
-    
-
-
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailTableViewSegue" {
@@ -91,13 +75,7 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewDelega
             print("segue activated, data sent over to detail view")
             
         }
-        
-        
-        
-        
     }
-   
-
 }
 
 
