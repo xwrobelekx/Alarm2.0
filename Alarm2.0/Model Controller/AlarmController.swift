@@ -58,7 +58,13 @@ class AlarmController {
     
     
     
-    
+    //MARK: - Methods
+    func toggleEnabled(for alarm: Alarm){
+     // switches the switch from true to false and vice versa
+     alarm.enabled = !alarm.enabled
+        
+        
+    }
     
     
     

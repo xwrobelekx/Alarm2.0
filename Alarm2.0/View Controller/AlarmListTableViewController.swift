@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
-class AlarmListTableViewController: UITableViewController {
+// delegate pattern step 4 - adopt the protocol
+class AlarmListTableViewController: UITableViewController, SwitchTableViewDelegate {
+ 
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,8 @@ class AlarmListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "updateCell", for: indexPath) as? SwitchTableViewCell
         let alarmToDisplay = AlarmController.shared.alarms[indexPath.row]
+        // delegate pattern step 6 - set the current cell as the delegate
+        cell?.cellDelegate = self
         cell?.alarm = alarmToDisplay
 
        
@@ -66,22 +70,20 @@ class AlarmListTableViewController: UITableViewController {
        
         }
     }
-   
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    
+    
+    
+    //MARK: - Methods
+    // delegate pattern step 5 - confrom to the protocol
+    func switchCellSwitchValueChanged(cell: SwitchTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        let alarmToggleToBeFlipped = AlarmController.shared.alarms[indexPath.row]
+        AlarmController.shared.toggleEnabled(for: alarmToggleToBeFlipped)
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
+    
 
     /*
     // MARK: - Navigation
